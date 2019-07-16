@@ -1,8 +1,8 @@
 #[macro_export]
 macro_rules! new_test {
     ($name:ident, $test_name:expr, $mac:ty) => {
-        #[test]
-        fn $name() {
+        //#[test]
+        pub fn $name() {
             use crypto_mac::blobby::Blob3Iterator;
             use crypto_mac::Mac;
 
