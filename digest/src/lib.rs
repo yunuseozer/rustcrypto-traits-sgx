@@ -14,10 +14,12 @@
 //! The `Digest` trait is the most commonly used trait.
 #![no_std]
 #![doc(html_logo_url = "https://raw.githubusercontent.com/RustCrypto/meta/master/logo_small.png")]
+#![cfg_attr(all(target_env = "sgx", target_vendor = "mesalock"), feature(rustc_private))]
 pub extern crate generic_array;
-#[cfg(feature = "std")]
-#[macro_use]
-extern crate std;
+#[cfg(all(feature = "std", feature = "mesalock_sgx", target_env = "sgx"))]
+#[macro_use] extern crate std;
+#[cfg(all(feature = "std", feature = "mesalock_sgx", not(target_env = "sgx")))]
+#[macro_use] extern crate sgx_tstd as std;
 #[cfg(feature = "dev")]
 pub extern crate blobby;
 use generic_array::{ArrayLength, GenericArray};

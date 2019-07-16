@@ -2,11 +2,11 @@
 #[macro_export]
 macro_rules! new_sync_test {
     ($name:ident, $cipher:ty, $test_name:expr) => {
-        #[test]
-        fn $name() {
+        //#[test]
+        pub fn $name() {
             use stream_cipher::blobby::Blob4Iterator;
             use stream_cipher::generic_array::GenericArray;
-            use stream_cipher::{NewStreamCipher, SyncStreamCipher};
+            use stream_cipher::{SyncStreamCipher, NewStreamCipher};
 
             let data = include_bytes!(concat!("data/", $test_name, ".blb"));
             for (i, row) in Blob4Iterator::new(data).unwrap().enumerate() {
@@ -41,11 +41,13 @@ macro_rules! new_sync_test {
 #[macro_export]
 macro_rules! new_seek_test {
     ($name:ident, $cipher:ty, $test_name:expr) => {
-        #[test]
-        fn $name() {
+        //#[test]
+        pub fn $name() {
             use stream_cipher::blobby::Blob4Iterator;
             use stream_cipher::generic_array::GenericArray;
-            use stream_cipher::{NewStreamCipher, SyncStreamCipher, SyncStreamCipherSeek};
+            use stream_cipher::{
+                SyncStreamCipher, SyncStreamCipherSeek, NewStreamCipher
+            };
 
             const MAX_SEEK: usize = 512;
 
@@ -83,11 +85,11 @@ macro_rules! new_seek_test {
 #[macro_export]
 macro_rules! new_async_test {
     ($name:ident, $test_name:expr, $cipher:ty) => {
-        #[test]
-        fn $name() {
+        //#[test]
+        pub fn $name() {
             use stream_cipher::blobby::Blob4Iterator;
             use stream_cipher::generic_array::GenericArray;
-            use stream_cipher::{NewStreamCipher, StreamCipher};
+            use stream_cipher::{StreamCipher, NewStreamCipher};
 
             fn run_test(
                 key: &[u8],
