@@ -1,13 +1,19 @@
 //! This crate provides trait for Message Authentication Code (MAC) algorithms.
 #![no_std]
 #![doc(html_logo_url = "https://raw.githubusercontent.com/RustCrypto/meta/master/logo_small.png")]
+#![cfg_attr(all(target_env = "sgx", target_vendor = "mesalock"), feature(rustc_private))]
 pub extern crate generic_array;
 extern crate subtle;
 
+#[cfg(all(feature = "std", feature = "mesalock_sgx", target_env = "sgx"))]
+extern crate std;
+#[cfg(all(feature = "std", feature = "mesalock_sgx", not(target_env = "sgx")))]
+extern crate sgx_tstd as std;
+
 #[cfg(feature = "dev")]
 pub extern crate blobby;
-#[cfg(feature = "std")]
-extern crate std;
+//#[cfg(feature = "std")]
+//extern crate std;
 
 use generic_array::typenum::Unsigned;
 use generic_array::{ArrayLength, GenericArray};
@@ -91,6 +97,11 @@ where
     /// `Mac` trait.
     pub fn code(self) -> GenericArray<u8, N> {
         self.code
+    }
+
+    /// Added by @dingelish, to provide backward compatibility
+    pub fn code_ref(&self) -> &GenericArray<u8, N> {
+        &self.code
     }
 }
 

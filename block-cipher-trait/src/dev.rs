@@ -1,8 +1,8 @@
 #[macro_export]
 macro_rules! new_test {
     ($name:ident, $test_name:expr, $cipher:ty) => {
-        #[test]
-        fn $name() {
+        //#[test]
+        pub fn $name() {
             use block_cipher_trait::blobby::Blob3Iterator;
             use block_cipher_trait::generic_array::typenum::Unsigned;
             use block_cipher_trait::generic_array::GenericArray;

@@ -4,8 +4,8 @@ use core::fmt::Debug;
 #[macro_export]
 macro_rules! new_test {
     ($name:ident, $test_name:expr, $hasher:ty, $test_func:ident) => {
-        #[test]
-        fn $name() {
+        //#[test]
+        pub fn $name() {
             use digest::blobby::Blob2Iterator;
             let data = include_bytes!(concat!("data/", $test_name, ".blb"));
 
