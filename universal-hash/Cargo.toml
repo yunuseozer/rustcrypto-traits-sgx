@@ -12,7 +12,7 @@ edition = "2018"
 
 [dependencies]
 generic-array = "0.12"
-subtle = { git = "https://github.com/mesalock-linux/subtle-sgx", default-features = false }
+subtle = { git = "https://github.com/yunuseozer/subtle-sgx", default-features = false }
 
 [features]
 std = []
